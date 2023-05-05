@@ -16,12 +16,14 @@ func buildBingUrls(searchTerm, country string, pages, count int) ([]string, erro
 	var toScrape []string
 	searchTerm = strings.Trim(searchTerm, " ")
 	searchTerm = strings.Replace(searchTerm, " ", "+", -1)
-	uniqueId := NewULidString()
-	if countryCode, found := bingDomains[country]; found {
+	//uniqueId := NewULidString()
+	if _, found := bingDomains[country]; found {
+		//log.Println(countryCode)
 		for i := 0; i < pages; i++ {
 			first, formPERE := firstParameter(i, count)
-			redigId := NewULidString()
-			scrapeURL := fmt.Sprintf("https://bing.com/search?q=%s&qs=n&sp=-1&lq=0&pq=%s&sc=0-23&sk=&cvid=%s&count=%d%s&ghsh=0&ghacc=0&ghpl=&toWww=1&redig=%s&first=%d%s", searchTerm, searchTerm, uniqueId, count, countryCode, redigId, first, formPERE)
+			//redigId := NewULidString()
+			//scrapeURL := fmt.Sprintf("https://bing.com/search?q=%s&qs=n&sp=-1&lq=0&pq=%s&sc=0-23&sk=&cvid=%s&count=%d%s&ghsh=0&ghacc=0&ghpl=&toWww=1&redig=%s&first=%d%s", searchTerm, searchTerm, uniqueId, count, countryCode, redigId, first, formPERE)
+			scrapeURL := fmt.Sprintf("https://bing.com/search?q=%s&count=%d&first=%d%s", searchTerm, count, first, formPERE)
 			log.Println(scrapeURL)
 			toScrape = append(toScrape, scrapeURL)
 		}

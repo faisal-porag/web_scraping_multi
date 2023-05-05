@@ -2,4 +2,7 @@
 /.idea
 env
 /bin
+.txt
+.idea/
+
 

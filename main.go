@@ -63,15 +63,12 @@ func main() {
 func ScrapingData(searchText string) string {
 	var buffer bytes.Buffer
 	var resultData string
-	res, err := bs.BingScrape(searchText, "us", nil, 2, 10, 5)
+	res, err := bs.BingScrape(searchText, "us", nil, 5, 10, 5)
 	if err == nil || len(res) > 0 {
 		for _, data := range res {
 			resultData = fmt.Sprintf(
-				"SL: %d\nURL: %s\nTitle: %s\nDesc: %s\n\n\n",
-				data.ResultRank,
+				"URL: %s\n\n",
 				data.ResultURL,
-				data.ResultTitle,
-				data.ResultDesc,
 			)
 			buffer.WriteString(resultData)
 		}
