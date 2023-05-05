@@ -61,6 +61,7 @@ func main() {
 }
 
 func ScrapingData(searchText string) string {
+	fmt.Println("Scrapping Start")
 	var buffer bytes.Buffer
 	var resultData string
 	res, err := bs.BingScrape(searchText, "us", nil, 5, 10, 5)
@@ -74,9 +75,11 @@ func ScrapingData(searchText string) string {
 		}
 		dynamicString := buffer.String()
 		//log.Println(dynamicString)
+		fmt.Println("Scrapping End")
 		return dynamicString
 	} else {
 		log.Println(err)
+		fmt.Println("Scrapping End")
 		return ""
 	}
 }

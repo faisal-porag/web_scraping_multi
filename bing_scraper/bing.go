@@ -16,14 +16,15 @@ func buildBingUrls(searchTerm, country string, pages, count int) ([]string, erro
 	var toScrape []string
 	searchTerm = strings.Trim(searchTerm, " ")
 	searchTerm = strings.Replace(searchTerm, " ", "+", -1)
-	//uniqueId := NewULidString()
-	if _, found := bingDomains[country]; found {
+	uniqueId := NewULidString()
+	if countryCode, found := bingDomains[country]; found {
 		//log.Println(countryCode)
 		for i := 0; i < pages; i++ {
 			first, formPERE := firstParameter(i, count)
-			//redigId := NewULidString()
+			redigId := NewULidString()
 			//scrapeURL := fmt.Sprintf("https://bing.com/search?q=%s&qs=n&sp=-1&lq=0&pq=%s&sc=0-23&sk=&cvid=%s&count=%d%s&ghsh=0&ghacc=0&ghpl=&toWww=1&redig=%s&first=%d%s", searchTerm, searchTerm, uniqueId, count, countryCode, redigId, first, formPERE)
-			scrapeURL := fmt.Sprintf("https://bing.com/search?q=%s&count=%d&first=%d%s", searchTerm, count, first, formPERE)
+			scrapeURL := fmt.Sprintf("https://bing.com/search?q=%s&qs=n&sp=-1&lq=0&pq=%s&sc=4-23&sk=&cvid=%s&count=%d%s&ghsh=0&ghacc=0&ghpl=&toWww=1&redig=%s&first=%d%s", searchTerm, searchTerm, uniqueId, count, countryCode, redigId, first, formPERE)
+			//scrapeURL := fmt.Sprintf("https://bing.com/search?q=%s&count=%d&first=%d%s", searchTerm, count, first, formPERE)
 			log.Println(scrapeURL)
 			toScrape = append(toScrape, scrapeURL)
 		}
@@ -55,17 +56,15 @@ func bingResultParser(response io.Reader, rank int) ([]SearchResult, error) {
 		item := sel.Eq(i)
 		linkTag := item.Find("a")
 		link, _ := linkTag.Attr("href")
-		titleTag := item.Find("h2")
-		descTag := item.Find("div.b_caption p")
-		desc := descTag.Text()
-		title := titleTag.Text()
+		//titleTag := item.Find("h2")
+		//descTag := item.Find("div.b_caption p")
+		//desc := descTag.Text()
+		//title := titleTag.Text()
 		link = strings.Trim(link, " ")
-		if link != "" && link != "#" && !strings.HasPrefix(link, "/") {
+		//if link != "" && link != "#" && !strings.HasPrefix(link, "/") {
+		if link != "" && link != "#" && strings.HasPrefix(link, "https://www.bing.com/ck/") {
 			result := SearchResult{
-				rank,
 				link,
-				title,
-				desc,
 			}
 			results = append(results, result)
 			rank++

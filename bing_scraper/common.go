@@ -10,10 +10,10 @@ import (
 )
 
 type SearchResult struct {
-	ResultRank  int
-	ResultURL   string
-	ResultTitle string
-	ResultDesc  string
+	//ResultRank  int
+	ResultURL string
+	//ResultTitle string
+	//ResultDesc  string
 }
 
 var userAgents = []string{

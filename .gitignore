@@ -1,0 +1,10 @@
+/.env
+/.idea
+env
+/bin
+.txt
+.idea/
+
+file_05.05.2023_1683308281521900481.txt
+*.txt
+
