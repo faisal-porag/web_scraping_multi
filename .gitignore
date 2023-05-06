@@ -5,5 +5,5 @@ env
 .txt
 .idea/
 
-*.txt
+file_*.txt
 
