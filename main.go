@@ -44,12 +44,9 @@ func main() {
 
 	// read the file line by line using scanner
 	scanner := bufio.NewScanner(f)
-
 	var keyWordList []string
 
 	for scanner.Scan() {
-		// do something with a line
-		//fmt.Printf("line: %s\n", scanner.Text())
 		strKeyWord := scanner.Text()
 		keyWordList = append(keyWordList, strKeyWord)
 	}
@@ -68,7 +65,8 @@ func main() {
 				defer wg.Done()
 				val := keyWordList[i]
 				//fmt.Printf("i: %v, val: %v\n", i, val)
-				saveData(val)
+				err := saveData(val)
+				log.Println(err)
 			}(i)
 		}
 		wg.Wait()
