@@ -60,7 +60,7 @@ func bingResultParser(response io.Reader, rank int) ([]SearchResult, error) {
 		//desc := descTag.Text()
 		//title := titleTag.Text()
 		link = strings.Trim(link, " ")
-		if link != "" && link != "#" && !strings.HasPrefix(link, "/") {
+		if link != "" && link != "#" && !strings.HasPrefix(link, "/") && !strings.HasPrefix(link, "https://www.bing.com/ck/") {
 			//if link != "" && link != "#" && strings.HasPrefix(link, "https://www.bing.com/ck/") {
 			result := SearchResult{
 				link,
